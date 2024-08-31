@@ -1,0 +1,205 @@
+function [QA] = NWB_QA_graphs(nwbAll,units)
+% NWB_QA_graphs Generates spike sorting metrics used in the SB
+% data release. 
+% nwbAll: A cell arrays containing all nwb files in the dataset 
+% units: A units struct created using NWB_SB_extractUnits 
+% figHandle: The resulting figure that shows all relevant stat tests. 
+
+QA = figure("Visible","on");
+sessionCount = length(nwbAll);
+
+%% Spike Sorting Metrics
+% Aggregating timestamps across session types. 
+total_ts = {units(:).spike_times}; 
+total_chan = [units(:).session_count;units(:).electrodes]';
+
+%  Filter clusters with 3 or less spikes
+thresh = 3;
+meets_threshold = cell2mat(cellfun(@(x) length(x)>thresh,total_ts,'UniformOutput',false));
+total_ts = total_ts(meets_threshold);
+total_chan = total_chan(meets_threshold,:);
+
+ISI_sub3 = NaN(length(total_ts),1);
+mean_rate = NaN(length(total_ts),1);
+CV2s = NaN(length(total_ts),1);
+% ts Metrics
+for i = 1:length(total_ts) % Summary Over all sessions
+    fprintf('Compiling metrics (cell %d)\n',i)
+    ts = total_ts{i}; % Import & Offset
+    % ISI
+    ts_isi = ts.*1e3; % Convert to ms
+    ISIs = diff(ts_isi);
+    ISI_sub3(i) = (sum(ISIs<3)/length(ISIs))*100;
+    % Hz
+    ts_hz = ts;
+    mean_rate(i) = length(ts_hz)/(max(ts_hz)-min(ts_hz));  
+    % CV2
+    ts_cv2 = ts;
+    isi_cv2 = diff(ts_cv2);
+    ignoreMode = 1;
+    try
+        [CV2, ~, ~, ~] = calcCV2(isi_cv2, ignoreMode);
+    catch e
+        fprintf('Error found for cell %d in total_ts\n', i)
+        error(e.message)
+    end
+
+    CV2s(i) = CV2;
+end
+% Filter NaNs in CV2 (for very few spikes in cluster)
+CV2s = CV2s(~isnan(CV2s));
+
+% Channel Metrics
+chanFreq = [];
+for i = 1:length(unique(total_chan(:,1)))
+    subj_cells = total_chan(total_chan(:,1)==i,:);
+    [~, n] = RunLength(subj_cells(:,2));
+    chanFreq = [chanFreq; n]; %#ok<AGROW> % For short term analysis
+end
+
+% Waveform Metrics
+iso_dist = [];
+mean_snr = [];
+peak_snr = [];
+proj_dist = [];
+for i = 1:length(nwbAll)
+    iso_dist = [iso_dist; nwbAll{i}.units.vectordata.get('waveforms_isolation_distance').data.load()]; %#ok<AGROW>
+    mean_snr = [mean_snr; nwbAll{i}.units.vectordata.get('waveforms_mean_snr').data.load()]; %#ok<AGROW>
+    peak_snr = [peak_snr; nwbAll{i}.units.vectordata.get('waveforms_peak_snr').data.load()]; %#ok<AGROW>
+    proj_dist = [proj_dist; nwbAll{i}.units.vectordata.get('waveforms_mean_proj_dist').data.load()]; %#ok<AGROW>
+end
+iso_dist = rmmissing(iso_dist); % Removing invalid NaN values. 
+
+%% Plotting
+
+% colors: K2017 Blue, 
+colors = {'#02009B'};
+% 
+% QA = figure(100);
+%  % Doing some window wizardry to move the plot to the left screen. No idea
+%  % how this works. Found  by trial and error. 
+% QA.WindowState = 'maximized';
+% movegui(QA,'west')
+% QA.WindowState = 'maximized';
+
+
+% Plot: Wires Per Num Units
+wPuPlot = subplot(2,5,1);
+uPw = histogram(chanFreq,'FaceColor',colors{1},'FaceAlpha',1);
+% uPw = histogram(chanFreq,'BinMethod','integer','FaceColor',colors{1},'FaceAlpha',1);
+uPw.BinWidth = 0.5;
+uPw.BinEdges = [uPw.BinWidth uPw.BinEdges] + uPw.BinWidth/2;
+title(sprintf('Units per wire: \\mu=%.2f \\sigma=%.2f',mean(chanFreq),std(chanFreq)))
+xlabel('Nr of units recorded')
+ylabel('Nr of wires')
+set(gca,'FontSize',13)
+% xlim([0 max(chanFreq)+1])
+xticks(1:(max(chanFreq)))
+
+% Plot: ISI
+isiPlot = subplot(2,5,2); %#ok<NASGU>
+thresh_isi = [4]; %#ok<NBRAK2>
+if ~isempty(thresh_isi); ISI_sub3_filtered = ISI_sub3(ISI_sub3<thresh_isi); else; ISI_sub3_filtered = ISI_sub3; end
+histogram(ISI_sub3_filtered,100,'FaceColor',colors{1},'FaceAlpha',1)
+xlim([0 8])
+title(sprintf('ISI<3%%: \\mu=%.2f \\sigma=%.2f',mean(ISI_sub3_filtered),std(ISI_sub3_filtered)))
+xlabel('Percent of Interspike Intervals (ISI) < 3 ms')
+ylabel('nr Units')
+set(gca,'FontSize',13)
+
+% Plot: Hz 
+hzPlot = subplot(2,5,3); %#ok<NASGU>
+thresh_Hz = [];
+if ~isempty(thresh_Hz); mean_rate_filtered = ISI_sub3(mean_rate < thresh_Hz); else; mean_rate_filtered = mean_rate; end
+histogram(mean_rate_filtered,100,'FaceColor',colors{1},'FaceAlpha',1)
+xlim([0 25])
+title(sprintf('Hz: \\mu=%.2f \\sigma=%.2f',mean(mean_rate_filtered(~isinf(mean_rate_filtered)),'omitnan'),std(mean_rate_filtered(~isinf(mean_rate_filtered)),'omitnan')))
+xlabel('Firing Rate (Hz)')
+ylabel('nr Units')
+set(gca,'FontSize',13)
+
+% Plot: CV2
+cv2Plot = subplot(2,5,4); %#ok<NASGU>
+thresh_cv2 = [];
+if ~isempty(thresh_cv2); CV2s_filtered = CV2s(CV2s < thresh_cv2); else; CV2s_filtered = CV2s; end
+CV2s_filtered = CV2s_filtered(~isnan(CV2s_filtered));
+histogram(CV2s_filtered,100,'FaceColor',colors{1},'FaceAlpha',1)
+% cdfplot(CV2s_filtered)
+title(sprintf('CV2: \\mu=%.2f \\sigma=%.2f',mean(CV2s,'omitnan'),std(CV2s,'omitnan')))
+xlabel('CV2')
+xlim([0 2])
+ylabel('nr Units')
+set(gca,'FontSize',13)
+
+% Plot: Waveform Peak SNR
+subplot(2,5,6)
+
+histogram(peak_snr,100,'FaceColor',colors{1},'FaceAlpha',1)
+xlim([0 max(peak_snr)])
+
+title(sprintf('Peak SNR: \\mu:%.2f \\sigma:%.2f',mean(peak_snr),std(peak_snr)))
+xlabel('Waveform peak SNR')
+ylabel('nr Units')
+set(gca,'FontSize',13)
+
+% Plot: Waveform Mean SNR
+subplot(2,5,7)
+
+histogram(mean_snr,100,'FaceColor',colors{1},'FaceAlpha',1)
+xlim([0 max(mean_snr)])
+
+title(sprintf('Mean SNR: \\mu:%.2f \\sigma:%.2f',mean(mean_snr),std(mean_snr)))
+xlabel('Waveform Mean SNR')
+ylabel('nr Units')
+set(gca,'FontSize',13)
+
+% Plot: Pairwise Distance (Projection Test)
+subplot(2,5,8)
+proj_dist_plot = nonzeros(proj_dist); proj_dist_plot = proj_dist_plot(~isnan(proj_dist_plot));
+histogram(proj_dist_plot,100,'FaceColor',colors{1},'FaceAlpha',1)
+xlim([0 50])
+
+title(sprintf('Mean Proj: \\mu:%.2f \\sigma:%.2f',mean(proj_dist_plot),std(proj_dist_plot)))
+set(gca,'FontSize',13)
+xlabel('Projection Distance (s.d)')
+ylabel('nr Units')
+
+
+% Plot: Isolation Distance (log10)
+subplot(2,5,9)
+iso_dist_log10 = log10(iso_dist);
+iso_plot = iso_dist_log10;
+histogram(iso_plot,100,'FaceColor',colors{1},'FaceAlpha',1)
+xlim([0 4])
+title(sprintf('Iso Dist: \\mu:%.2f \\sigma:%.2f',mean(iso_plot),std(iso_plot)))
+
+xlabel('Isolation Distance (log 10)')
+ylabel('nr Units')
+set(gca,'FontSize',13)
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

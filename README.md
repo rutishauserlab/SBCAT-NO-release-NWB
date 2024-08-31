@@ -15,7 +15,7 @@ Abstract of the paper:
 
 
 <p align="center">
-  <img width="500" height="400" src="https://github.com/rutishauserlab/SBCAT-release-NWB/blob/main/assets/Figure1.png">
+  <img width="500" height="400" src="https://github.com/rutishauserlab/SBCAT_NO-release-NWB/blob/main/assets/Figure1.png">
 </p>
 <!--   <img width="400" height="500" src="https://placehold.co/400x500.png"> -->
 
