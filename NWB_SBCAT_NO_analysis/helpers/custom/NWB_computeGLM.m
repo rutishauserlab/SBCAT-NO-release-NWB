@@ -14,6 +14,8 @@ whichWindow_bsl = [-.9 -.3]; % baseline
 % Filtering for Global Rate (rateFilter should be a nonzero float)
 if ~isempty(rateFilter)
     aboveRate = rateFilter_units(nwbAll,all_units,rateFilter);
+else
+    aboveRate = ones(length(all_units),1);
 end
 all_units = all_units(logical(aboveRate));
 

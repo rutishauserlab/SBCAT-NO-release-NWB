@@ -86,10 +86,10 @@ fprintf('Loading SternbergCAT_NO\n')
 all_units_sbcat = NWB_SB_extractUnits(nwbAll_sb,load_all_waveforms);  
 
 %% Plot behavior
-% plots behavior as in Fig. 1 (Daume et al. 2024b)
+% plots behavior as in Fig. 1c-g (Daume et al. 2024b)
 % set inputRange to full range
 
-paramsSB.plotBehavior = 0;
+paramsSB.plotBehavior = 1;
 if paramsSB.plotBehavior
     plot_behavior(nwbAll_sb);
 end
@@ -100,7 +100,7 @@ paramsSB.doPlot = 0;  % if =1, plot significant cells.
 paramsSB.plotAlways = 0; % Plot regardless of selectivity (NOTE: generates a lot of figure windows unless exportFig=1)
 paramsSB.exportFig = 0; 
 paramsSB.exportType = 'png'; % File type for export. 'png' is the default. 
-paramsSB.rateFilter =  .1; % Rate filter in Hz. Removes cells from analysis that are below threshold. Setting to empty disables the filter. 
+paramsSB.rateFilter =  0.1; % Rate filter in Hz. Removes cells from analysis that are below threshold. Setting to empty disables the filter. 
 paramsSB.figOut = [paths.figOut fs 'stats_sternberg'];
 
 %% Determine Category Cells
@@ -112,6 +112,8 @@ paramsSB.figOut = [paths.figOut fs 'stats_sternberg'];
 % specifying a minimum firing rate threshold paramsSC.rateFilter. To disable 
 % analysis of all cells entirely, set paramsSC.calcSelective = 0.
 
+% category neuron count might slightly vary from Daume et al. 2024 due to
+% using permutation tests
 paramsSB.calcSelective = 1;
 if paramsSB.calcSelective
     [sig_CatCells_sb, areas_sb_cat] = NWB_calcCatSelective_SB(nwbAll_sb,all_units_sbcat,paramsSB);
@@ -161,6 +163,8 @@ end
 
 
 %% GLM
+% This computes the mixed-model GLM used for Fig. 3a in Daume et al. 2024b
+% and prints/plots its results
 paramsSB.doPlot = 1;
 paramsSB.computeGLM = 1;
 
@@ -186,7 +190,7 @@ if paramsSB.computeGLM
 end
 
 %% Determine Memory-selective Cells
-% This section selects for MS neurons in all areas. It is preceded by
+% This section selects for MS neurons in both areas. It is preceded by
 % a parameters section, which allows for the 
 % control of various stages of the analysis and plotting process. 
 
