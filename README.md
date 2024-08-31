@@ -6,7 +6,7 @@
 
 ## Introduction
 
-This repository contains the code that accompanies [Daume et. al. 2024b](https://www.nature.com/articles/s41586-024-07309-z) 'Persistent activity during working memory maintenance predicts long-term memory formation in the human hippocampus'. The purpose of the code in this repository is to provide examples of how to use the released data. This dataset is formatted in the [Neurodata Without Borders (NWB)](https://www.nwb.org/) format, which can easily be accessed from both MATLAB and Python as described [here](https://nwb-schema.readthedocs.io/en/latest/index.html). 
+This repository contains the code that accompanies [Daume et. al. 2024b](https://www.biorxiv.org/content/10.1101/2024.07.15.603630v1) 'Persistent activity during working memory maintenance predicts long-term memory formation in the human hippocampus'. The purpose of the code in this repository is to provide examples of how to use the released data. This dataset is formatted in the [Neurodata Without Borders (NWB)](https://www.nwb.org/) format, which can easily be accessed from both MATLAB and Python as described [here](https://nwb-schema.readthedocs.io/en/latest/index.html). 
 
 Abstract of the paper:
 >Working Memory (WM) and Long-Term Memory (LTM) are often viewed as separate cognitive systems. Little is known about how these systems interact when forming memories. We recorded single neurons in the human medial temporal lobe while patients maintained novel items in WM and a subsequent recognition memory test for the same items. In the hippocampus but not the amygdala, the level of WM content-selective persist activity during WM maintenance was predictive of whether the item was later recognized with high confidence or forgotten. In contrast, visually evoked activity in the same cells was not predictive of LTM formation. During LTM retrieval, memory-selective neurons responded more strongly to familiar stimuli for which persistent activity was high while they were maintained in WM. Our study suggests that hippocampal persistent activity of the same cell supports both WM maintenance and LTM encoding, thereby revealing a common single-neuron component of these two memory systems. 
@@ -35,7 +35,7 @@ Running the provided code and analyzing the dataset in MATLAB requires the downl
 
 NOTE: The dataset will be made publicly available upon acceptance of the underlying paper. 
 
-The dataset is available in NWB format from the DANDI Archive under [DANDI:000673](https://dandiarchive.org/dandiset/000673). 
+The dataset is available in NWB format from the DANDI Archive under [DANDI:001187](https://dandiarchive.org/dandiset/001187). 
 <!--This dataset is also available from the DABI Archive under [Placeholder](https://rb.gy/otj7q) -->
 
 Dandi datasets are accessible through the Dandi command line interface (CLI). To install this Python client, use `pip install dandi` or `conda install -c conda-forge dandi`, depending on your Python environment setup. 
@@ -74,15 +74,7 @@ The main script in this repo, `NWB_SBCAT_analysis_demo_main.m`, is designed to a
 
 * **Single Unit Analysis Example:** This section plots the example category-selective cell that can be found in Fig 3a of Daume et al. To decrease loading time, please set `importRange = 6`. 
 
-* **LFP PAC Example Figure:** This section recreates the example gamma amplitude distribution across theta phase bins in addition to the comodulograms across load conditions (Fig 2d, Daume et al). To decrease loading times, set `importRange = 5`.
-
-* **SU PAC Example Figure:** This section illustrates the binning and the model comparisons used in PAC neuron selection for an example neuron. To decrease loading times, set `importRange = 32`.
-
 * **Recordings by Area:** The script also calculates the number of LFP channels and cells by area and saves the results into a .xlsx file. This can be disabled by setting `countAreas = 0`.
-  
-* **Spike Sorting Quality Metrics:** This section plots spike sorting metrics for single units recorded in the Sternberg/screening tasks. These metrics include the percentage of inter-spike intervals (ISIs) that were less than 3 ms, mean firing rates for all units, coefficient of variation (CV2) values for all units, signal-to-noise ratio (SNR) of the peak of the mean waveform, mean SNR for all values in a unit’s mean waveform, pairwise projection distance between each unit in which multiple units were found on the same electrode, isolation distance (scaled to log 10 for ease of viewing) across all units for which this metric was defined.
-
-* **Simulating Noise Correlations:** Use main_popGeometry_noiseCorrs.m to simulate noise correlations between two or more (as specified by `Pdims`) neurons. This script will determine and plot the signal and the noise axes, their angle, as well as the standard deviation of the values projected onto the signal axis before and after noise correlations were removed among the simulated neurons. The script allows to change the number of trials (`NperGroup`), the number of neurons with category tuning (`Pdims_withTuning`), the method to extract the noise axes (`modeNoiseAxis`), as well as the classifier (`modeClassifier`). Parameters can be changed from within the script.
 
 Please make sure to thoroughly read the comments in the code to understand the functionality of each part. If you encounter any problems, please report them as issues in the repository.
 
@@ -90,11 +82,12 @@ Please make sure to thoroughly read the comments in the code to understand the f
 This repository has been tested successfully in MATLAB versions 2019a, 2020a, 2022a, & 2023a.
 
 ## Contributors
-* [Michael Kyzar](mailto:kyzarnexus@gmail.com)
 * [Jonathan Daume](mailto:Jonathan.Daume@cshs.org)
+* [Sophia Cheng](mailto:sophia.cheng@cshs.org)
+* [Michael Kyzar](mailto:kyzarnexus@gmail.com)
 * [Ueli Rutishauser](mailto:Ueli.Rutishauser@cshs.org) (Principal Investigator)
 
->Citation: Daume, J., Kamiński, J., Schjetnan, A.G.P. et al. Control of working memory by phase–amplitude coupling of human hippocampal neurons. Nature (2024). doi:[10.1038/s41586-024-07309-z](https://doi.org/10.1038/s41586-024-07309-z)
+>Citation: Daume et al. Persistent activity during working memory maintenance predicts long-term memory formation in the human hippocampus. Neuron (in press). bioRxiv(https://www.biorxiv.org/content/10.1101/2024.07.15.603630v1)
 
 
 ## Funding
