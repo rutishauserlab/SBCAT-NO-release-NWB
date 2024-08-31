@@ -19,10 +19,10 @@ fs = filesep;
 
 
 % subject IDs for dataset.
-importRange = []; % Full Range
+% importRange = []; % Full Range
 % importRange = [1:3]; % Arbitrary example
 % importRange = [6]; % SB-CAT Example Cat Cell (See Daume et. al. Fig 2a)
-% importRange = [25]; % MS Example Cell (See Daume et. al. Fig 4a)
+importRange = [25]; % MS Example Cell (See Daume et. al. Fig 4a)
 
 
 %% Initializing and pathing
@@ -148,7 +148,7 @@ if paramsSB.calcSelective && specify_selectivity
     end
 end
 
-%% STERNBERG CAT neuron Example.
+%% Cat-selective neuron Example.
 % This section plots the example category-selective cell that can be 
 % found in Fig 2a of Daume et al (2024b). 
 
@@ -190,8 +190,8 @@ if paramsSB.computeGLM
 end
 
 %% Determine Memory-selective Cells
-% This section selects for MS neurons in both areas. It is preceded by
-% a parameters section, which allows for the 
+% This section selects for MS neurons in both areas. Use the
+% parameters section above to allow for the 
 % control of various stages of the analysis and plotting process. 
 
 paramsSB.calcSelective = 1;
@@ -232,7 +232,8 @@ end
 %% STERNBERG MS neuron example. 
 % This section plots the example memory-selective cell that can be 
 % found in Fig 4a of Daume et al (2024b). 
-
+% Set importRange to 25 to reduce load times
+ 
 % Specify by sub-id, ses-id, unit_id
 unit_example = [20, 1, 26]; % sub-20-ses-1 cell 26 
 

@@ -1,4 +1,4 @@
-# Sample code for: XXX
+# Sample code for: Persistent activity during working memory maintenance predicts long-term memory formation in the human hippocampus
 
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![Generic badge](https://img.shields.io/badge/release-1.0.0-green.svg)](https://github.com/rutishauserlab/SBCAT-release-NWB/releases/tag/v1.0.0)
@@ -33,8 +33,6 @@ Running the provided code and analyzing the dataset in MATLAB requires the downl
 
 ## Installation (Data)
 
-NOTE: The dataset will be made publicly available upon acceptance of the underlying paper. 
-
 The dataset is available in NWB format from the DANDI Archive under [DANDI:001187](https://dandiarchive.org/dandiset/001187). 
 <!--This dataset is also available from the DABI Archive under [Placeholder](https://rb.gy/otj7q) -->
 
@@ -46,7 +44,6 @@ After installing the Dandi CLI, use `dandi download [insert dataset link]` to do
 
 NWB Files can additionally be loaded and analyzed using the [PyNWB](https://github.com/NeurodataWithoutBorders/pynwb) python package. Further documentation can be found [here](https://pynwb.readthedocs.io/en/stable/). 
 
-
 Validation of this dataset was performed using PyNWB (2.3.1) and PyNWB-dependent packages, such as nwbinspector (0.4.28) and dandi (0.55.1). The command lines used for each method are as follows:
 * dandi: `dandi validate $target_directory`
 * nwbinspector: `nwbinspector $target_directory`
@@ -57,10 +54,10 @@ All validators returned no errors in data formatting & best-use practices across
 
 ## MATLAB Analysis
 
-The main script in this repo, `NWB_SBCAT_analysis_demo_main.m`, is designed to analyze the released dataset and to reproduce select figures & metrics noted in Daume et. al. 2024. It can calculate several metrics related to behavior (reaction time, accuracy), spike sorting, and single-unit (SU) activity during the task.
+The main script in this repo, `NWB_SBCAT_SO_analysis_main.m`, is designed to analyze the released dataset and to reproduce select figures & metrics noted in Daume et. al. 2024b. It can calculate several metrics related to behavior (reaction time, accuracy) and single-unit (SU) activity during the task.
 
 ### Steps to Use the Script
-* **Set Parameters:** The first section of the script sets important parameters. The `importRange` is the range of files for the dataset. For the current release, subject IDs have a range of `1:44`. The full range can also be specified by setting `importRange=[]`.
+* **Set Parameters:** The first section of the script sets important parameters. The `importRange` is the range of files for the dataset. For the current release, subject IDs have a range of `1:46`. The full range can also be specified by setting `importRange=[]`.
 
 * **Initialization and Pathing:** The script then defines the directory paths for the code, the currently installed MatNWB package, and the dataset, and then adds them to the MATLAB path. If figures are generated, there is an additional option to add a custom save destination. Please ensure that the defined paths in the script are correct for your setup. This section also uses MatNWB's generateCore() function to initialize the NWB API if it has not been initialized already.
 
@@ -68,18 +65,22 @@ The main script in this repo, `NWB_SBCAT_analysis_demo_main.m`, is designed to a
 
 * **Extracting Single Units:** Single unit information is extracted from the loaded NWB files for ease of indexing, using the `NWB_SB_extractUnits` function. If spike waveforms are not needed for analysis, the `load_all_waveforms` flag can be set to `0` to only extract the mean waveform. All future plots will use this mean waveform instead of a spike waveform pdf. 
 
-* **Single Unit Analysis:** This section is preceded by a parameters section, which allows for the control of various stages of the analysis and plotting process. For example, one can choose to plot figures for significant cells by setting `paramsSC.doPlot = 1` or filter units being used for analysis by specifying a minimum firing rate threshold `paramsSC.rateFilter`. To disable analysis of all cells entirely, set `paramsSC.calcSelective = 0`. 
+* **Determine Category Cells:** This section determines category-selective neurons among all neurons. It is preceded by a parameters section, which allows for the control of various stages of the analysis and plotting process. For example, one can choose to plot figures for significant cells by setting `paramsSC.doPlot = 1` or filter units being used for analysis by specifying a minimum firing rate threshold `paramsSC.rateFilter`. To disable analysis of all cells entirely, set `paramsSC.calcSelective = 0`. 
 
-* **Selectivity by Area:** This section calculates the proportion of category-selective cells across each area measured. It is intended to use `importRange = 1:44`.
+* **Selectivity by Area:** This section calculates the proportion of category-selective cells across each area measured. It is intended to use `importRange = 1:46`.
 
-* **Single Unit Analysis Example:** This section plots the example category-selective cell that can be found in Fig 3a of Daume et al. To decrease loading time, please set `importRange = 6`. 
+* **Category neuron Example:** This section plots the example category-selective cell that can be found in Fig 2a of Daume et al. To decrease loading time, please set `importRange = 6`. 
 
-* **Recordings by Area:** The script also calculates the number of LFP channels and cells by area and saves the results into a .xlsx file. This can be disabled by setting `countAreas = 0`.
+* **GLM analysis:** This section computes the mixed-model GLM used for Fig. 3a in Daume et al. and prints/plots the results.
+
+* **Determine Memory-selective Cells:** This section selects for MS neurons in both areas. Use the parameters section above to allow for the control of various stages of the analysis and plotting process. 
+
+* **Memory-selective neuron example:** This section plots the example memory-selective cell that can be found in Fig 4a of Daume et al (2024b). To decrease loading time, please set `importRange = 25`. 
 
 Please make sure to thoroughly read the comments in the code to understand the functionality of each part. If you encounter any problems, please report them as issues in the repository.
 
 
-This repository has been tested successfully in MATLAB versions 2019a, 2020a, 2022a, & 2023a.
+This repository has been tested in MATLAB versions 2019a & 2024a.
 
 ## Contributors
 * [Jonathan Daume](mailto:Jonathan.Daume@cshs.org)
@@ -96,7 +97,7 @@ This work was supported by the National Institute of Health (U01NS117839 to U.R.
 
 ## License 
 
-"SBCAT-release-NWB" Copyright (c) 2024, Rutishauser Lab. All rights reserved.
+"SBCAT-NO-release-NWB" Copyright (c) 2024, Rutishauser Lab. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
