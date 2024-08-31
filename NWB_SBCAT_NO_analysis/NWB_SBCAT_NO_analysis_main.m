@@ -162,7 +162,7 @@ if paramsSB_ex.processExamples
 end
 
 
-%% GLM
+%% Compute GLM
 % This computes the mixed-model GLM used for Fig. 3a in Daume et al. 2024b
 % and prints/plots its results
 paramsSB.doPlot = 1;
@@ -229,7 +229,7 @@ if paramsSB.calcSelective && specify_selectivity
     end
 end
 
-%% STERNBERG MS neuron example. 
+%% MS neuron example. 
 % This section plots the example memory-selective cell that can be 
 % found in Fig 4a of Daume et al (2024b). 
 % Set importRange to 25 to reduce load times
