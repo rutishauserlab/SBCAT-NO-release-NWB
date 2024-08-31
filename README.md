@@ -87,7 +87,7 @@ This repository has been tested successfully in MATLAB versions 2019a, 2020a, 20
 * [Michael Kyzar](mailto:kyzarnexus@gmail.com)
 * [Ueli Rutishauser](mailto:Ueli.Rutishauser@cshs.org) (Principal Investigator)
 
->Citation: Daume et al. Persistent activity during working memory maintenance predicts long-term memory formation in the human hippocampus. Neuron (in press). bioRxiv(https://www.biorxiv.org/content/10.1101/2024.07.15.603630v1)
+>Citation: Daume et al. Persistent activity during working memory maintenance predicts long-term memory formation in the human hippocampus. Neuron (in press). [bioRxiv](https://www.biorxiv.org/content/10.1101/2024.07.15.603630v1)
 
 
 ## Funding
