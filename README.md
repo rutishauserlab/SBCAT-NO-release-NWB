@@ -92,7 +92,7 @@ This repository has been tested successfully in MATLAB versions 2019a, 2020a, 20
 
 ## Funding
 
-Acquisition of this dataset has been supported by the National Institute of Neurological Disorders and Stroke (U01NS103792 and U01NS117839 to U.R.), the National Science Foundation (BCS-2219800 to U.R.), and the German National Academy of Sciences Leopoldina (Postdoc fellowship to J.D.).
+This work was supported by the National Institute of Health (U01NS117839 to U.R.), a Postdoctoral Fellowship by the German Academy of Sciences Leopoldina (to J.D.) and a Postdoctoral Award by the Center for Neural Science and Medicine at Cedars-Sinai (to J.D.).
 
 ## License 
 

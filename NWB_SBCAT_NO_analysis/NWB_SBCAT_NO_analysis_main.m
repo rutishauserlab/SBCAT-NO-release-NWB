@@ -34,7 +34,7 @@ importRange = []; % Full Range
 % setup. This section also uses MatNWB's generateCore() function to 
 % initialize the NWB API if it has not been initialized already.
 
-paths.baseData = '/Users/daumej/Documents/NWB_SBCAT_NO/waveform_test'; % Dataset directory
+paths.baseData = '/Users/daumej/Documents/NWB_SBCAT_NO/data_NWB'; % Dataset directory
 paths.nwb_sb = paths.baseData; % Dandiset Directory
 % This script should be in master directory
 scriptPath = matlab.desktop.editor.getActiveFilename; scriptPathParse = split(scriptPath,fs); scriptPathParse = scriptPathParse(1:end-1);

@@ -4,8 +4,8 @@ aboveRate = ones(length(all_units),1);
 
 for i = 1:length(all_units)
     SU = all_units(i);
-    tsEvents_WM = nwbAll{SU.session_count}.acquisition.get('events_WM').timestamps.load;
-    tsEvents_LTM = nwbAll{SU.session_count}.acquisition.get('events_LTM').timestamps.load;
+    tsEvents_WM = nwbAll{SU.session_count}.acquisition.get('events_raw_WM').timestamps.load;
+    tsEvents_LTM = nwbAll{SU.session_count}.acquisition.get('events_raw_LTM').timestamps.load;
     spike_times_WM = all_units(i).spike_times(all_units(i).spike_times<=tsEvents_WM(end));
     spike_times_LTM = all_units(i).spike_times(all_units(i).spike_times>=tsEvents_LTM(1));
     globalRate_WM = length(spike_times_WM)/(tsEvents_WM(end)-tsEvents_WM(1));
