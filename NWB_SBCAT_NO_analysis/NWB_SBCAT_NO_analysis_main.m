@@ -13,7 +13,7 @@ fs = filesep;
 %% Parameters
 % The first section of the script sets important parameters.
 % The importRange is the range of files for the dataset. 
-% For the current release, subject IDs have a range of 1:44. 
+% For the current release, subject IDs have a range of 1:46. 
 % The full range can also be specified by setting importRange=[]
 
 
