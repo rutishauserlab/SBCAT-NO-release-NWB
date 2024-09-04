@@ -194,7 +194,7 @@ end
 % parameters section above to allow for the 
 % control of various stages of the analysis and plotting process. 
 
-paramsSB.doPlot = 0;
+paramsSB.doPlot = 0; %plotting not implemented for MS cells
 paramsSB.calcSelective = 1;
 if paramsSB.calcSelective
     [sig_MSCells_sb, areas_sb_mem] = NWB_calcMemSelective_SB(nwbAll_sb,all_units_sbcat,paramsSB);
