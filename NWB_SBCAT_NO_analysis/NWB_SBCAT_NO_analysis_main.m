@@ -1,12 +1,11 @@
 %% NWB_SBCAT_import_main
-% Sample code to load/analyze the provided dataset for Daume et. al. 
+% Sample code to load/analyze the provided dataset for Daume et. al. 2024
 % Calculates the following:
 %   - Behavioral metrics
-%   - Spike sorting metrics
-%   - Category cell selectivity metrics
+%   - Determine category-selective/memory-selective cells 
+%   - Computes and plots results of main GLM (Fig. 3a)
 %   - Proportion of CAT/MS cells per area
-%   - Table of SUs recorded per area
-%   - Plotting of sample cells
+%   - Plotting of sample cells (Fig. 2a,4a)
 %
 
 clear; clc; close all
