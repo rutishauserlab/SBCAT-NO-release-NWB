@@ -39,7 +39,7 @@ paths.nwb_sb = paths.baseData; % Dandiset Directory
 % This script should be in master directory
 scriptPath = matlab.desktop.editor.getActiveFilename; scriptPathParse = split(scriptPath,fs); scriptPathParse = scriptPathParse(1:end-1);
 paths.code = strjoin(scriptPathParse,filesep); 
-paths.matnwb = '/path-to-matlab-folder//MATLAB/matnwb-2.6.0.2';
+paths.matnwb = '/path-to-matlab-folder/MATLAB/matnwb-2.6.0.2';
 paths.figOut = [strjoin(scriptPathParse(1:end-1),filesep) fs 'sbcat_no_figures'];
 % Helpers
 if(~isdeployed) 
@@ -194,7 +194,7 @@ end
 % parameters section above to allow for the 
 % control of various stages of the analysis and plotting process. 
 
-paramsSB.doPlot = 0;
+paramsSB.doPlot = 0; %plotting not implemented for MS cells
 paramsSB.calcSelective = 1;
 if paramsSB.calcSelective
     [sig_MSCells_sb, areas_sb_mem] = NWB_calcMemSelective_SB(nwbAll_sb,all_units_sbcat,paramsSB);
