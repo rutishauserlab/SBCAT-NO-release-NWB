@@ -151,7 +151,7 @@ end
 
 %% Cat-selective neuron Example.
 % This section plots the example category-selective cell that can be 
-% found in Fig 2a of Daume et al (2024). 
+% found in Fig. 2a of Daume et al (2024). 
 
 % Specify by sub-id, ses-id, unit_id, preferred CAT
 unit_example = [5, 1, 16, 2]; % sub-5-ses-1 cell 29 % Category 2: Animals
@@ -164,7 +164,7 @@ end
 
 
 %% Compute GLM
-% This computes the mixed-model GLM used for Fig. 3a in Daume et al. 2024
+% This computes the mixed-model GLM used for Fig. 3a in Daume et al. (2024)
 % and prints/plots its results
 % This needs the output from the "Determine Category Cells" section as it
 % computes the GLM across all category neurons
@@ -236,7 +236,7 @@ end
 
 %% MS neuron example. 
 % This section plots the example memory-selective cell that can be 
-% found in Fig 4a of Daume et al (2024). 
+% found in Fig. 4a of Daume et al (2024). 
 % Set importRange to 25 to reduce load times
  
 % Specify by sub-id, ses-id, unit_id
