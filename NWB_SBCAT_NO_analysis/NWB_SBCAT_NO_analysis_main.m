@@ -6,7 +6,7 @@
 %   - Determine category-selective/memory-selective cells
 %   - Proportion of CAT/MS cells per area
 %   - Compute and plot results of main GLM analysis (Fig. 3a)
-%   - Plotting of sample cells (Fig. 2a,4a)
+%   - Plotting of sample cells (Figs. 2a & 4a)
 
 
 clear; clc; close all
