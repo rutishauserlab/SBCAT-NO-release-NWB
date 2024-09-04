@@ -38,7 +38,7 @@ The dataset is available in NWB format from the DANDI Archive under [DANDI:00118
 
 Dandi datasets are accessible through the Dandi command line interface (CLI). To install this Python client, use `pip install dandi` or `conda install -c conda-forge dandi`, depending on your Python environment setup. 
 
-After installing the Dandi CLI, use `dandi download [insert dataset link]` to download the dataset. 
+After installing the Dandi CLI, use `dandi download https://dandiarchive.org/dandiset/001187` to download the dataset. 
 
 ## File Validation (Python)
 
