@@ -113,7 +113,7 @@ paramsSB.figOut = [paths.figOut fs 'stats_sternberg'];
 % specifying a minimum firing rate threshold paramsSC.rateFilter. To disable 
 % analysis of all cells entirely, set paramsSC.calcSelective = 0.
 
-% category neuron count might slightly vary from Daume et al. 2024 due to
+% category neuron count might slightly vary from Daume et al. (2024) due to
 % using permutation tests
 paramsSB.calcSelective = 1;
 if paramsSB.calcSelective
@@ -122,7 +122,7 @@ end
 %% Category Cells Per-Area
 % This section calculates the proportion of 
 % category-selective cells across each area measured (compute the previous section first) 
-% It is intended to use `importRange = []`.
+% It is intended to use importRange = [].
 
 specify_selectivity = 1; % Set importRange to full range
 if paramsSB.calcSelective && specify_selectivity
