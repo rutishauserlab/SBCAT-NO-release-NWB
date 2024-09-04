@@ -20,7 +20,7 @@ fs = filesep;
 
 % subject IDs for dataset.
 importRange = []; % Full Range
-% importRange = [1:3]; % Arbitrary example
+% importRange = [1:46]; % Full range
 % importRange = [6]; % SB-CAT Example Cat Cell (See Daume et. al. Fig 2a)
 % importRange = [25]; % MS Example Cell (See Daume et. al. Fig 4a)
 
