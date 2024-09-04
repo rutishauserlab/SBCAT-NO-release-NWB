@@ -20,7 +20,7 @@ fs = filesep;
 
 % subject IDs for dataset.
 importRange = []; % Full Range
-% importRange = [1:3]; % Arbitrary example
+% importRange = [1:46]; % Full range
 % importRange = [6]; % SB-CAT Example Cat Cell (See Daume et. al. Fig 2a)
 % importRange = [25]; % MS Example Cell (See Daume et. al. Fig 4a)
 
@@ -113,7 +113,7 @@ paramsSB.figOut = [paths.figOut fs 'stats_sternberg'];
 % specifying a minimum firing rate threshold paramsSC.rateFilter. To disable 
 % analysis of all cells entirely, set paramsSC.calcSelective = 0.
 
-% category neuron count might slightly vary from Daume et al. 2024 due to
+% category neuron count might slightly vary from Daume et al. (2024) due to
 % using permutation tests
 paramsSB.calcSelective = 1;
 if paramsSB.calcSelective
@@ -122,7 +122,7 @@ end
 %% Category Cells Per-Area
 % This section calculates the proportion of 
 % category-selective cells across each area measured (compute the previous section first) 
-% It is intended to use `importRange = []`.
+% It is intended to use importRange = [].
 
 specify_selectivity = 1; % Set importRange to full range
 if paramsSB.calcSelective && specify_selectivity
@@ -151,7 +151,7 @@ end
 
 %% Cat-selective neuron Example.
 % This section plots the example category-selective cell that can be 
-% found in Fig 2a of Daume et al (2024). 
+% found in Fig. 2a of Daume et al (2024). 
 
 % Specify by sub-id, ses-id, unit_id, preferred CAT
 unit_example = [5, 1, 16, 2]; % sub-5-ses-1 cell 29 % Category 2: Animals
@@ -164,7 +164,7 @@ end
 
 
 %% Compute GLM
-% This computes the mixed-model GLM used for Fig. 3a in Daume et al. 2024
+% This computes the mixed-model GLM used for Fig. 3a in Daume et al. (2024)
 % and prints/plots its results
 % This needs the output from the "Determine Category Cells" section as it
 % computes the GLM across all category neurons.
@@ -236,7 +236,7 @@ end
 
 %% MS neuron example. 
 % This section plots the example memory-selective cell that can be 
-% found in Fig 4a of Daume et al (2024). 
+% found in Fig. 4a of Daume et al (2024). 
 % Set importRange to 25 to reduce load times
  
 % Specify by sub-id, ses-id, unit_id
