@@ -19,10 +19,10 @@ fs = filesep;
 
 
 % subject IDs for dataset.
-% importRange = []; % Full Range
+importRange = []; % Full Range
 % importRange = [1:3]; % Arbitrary example
 % importRange = [6]; % SB-CAT Example Cat Cell (See Daume et. al. Fig 2a)
-importRange = [25]; % MS Example Cell (See Daume et. al. Fig 4a)
+% importRange = [25]; % MS Example Cell (See Daume et. al. Fig 4a)
 
 
 %% Initializing and pathing
@@ -34,12 +34,12 @@ importRange = [25]; % MS Example Cell (See Daume et. al. Fig 4a)
 % setup. This section also uses MatNWB's generateCore() function to 
 % initialize the NWB API if it has not been initialized already.
 
-paths.baseData = '/Users/daumej/Documents/NWB_SBCAT_NO/data_NWB'; % Dataset directory
+paths.baseData = '/path-to-folder/Dandisets/001187'; % Dataset directory
 paths.nwb_sb = paths.baseData; % Dandiset Directory
 % This script should be in master directory
 scriptPath = matlab.desktop.editor.getActiveFilename; scriptPathParse = split(scriptPath,fs); scriptPathParse = scriptPathParse(1:end-1);
 paths.code = strjoin(scriptPathParse,filesep); 
-paths.matnwb = '/Users/daumej/Documents/MATLAB/matnwb-2.6.0.2';
+paths.matnwb = '/path-to-matlab-folder/MATLAB/matnwb-2.6.0.2';
 paths.figOut = [strjoin(scriptPathParse(1:end-1),filesep) fs 'sbcat_no_figures'];
 % Helpers
 if(~isdeployed) 
