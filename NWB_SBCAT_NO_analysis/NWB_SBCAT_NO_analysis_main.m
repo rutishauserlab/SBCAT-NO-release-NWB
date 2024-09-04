@@ -39,7 +39,7 @@ paths.nwb_sb = paths.baseData; % Dandiset Directory
 % This script should be in master directory
 scriptPath = matlab.desktop.editor.getActiveFilename; scriptPathParse = split(scriptPath,fs); scriptPathParse = scriptPathParse(1:end-1);
 paths.code = strjoin(scriptPathParse,filesep); 
-paths.matnwb = '/path-to-matlab-folder//MATLAB/matnwb-2.6.0.2';
+paths.matnwb = '/path-to-matlab-folder/MATLAB/matnwb-2.6.0.2';
 paths.figOut = [strjoin(scriptPathParse(1:end-1),filesep) fs 'sbcat_no_figures'];
 % Helpers
 if(~isdeployed) 
