@@ -87,7 +87,8 @@ all_units_sbcat = NWB_SB_extractUnits(nwbAll_sb,load_all_waveforms);
 
 %% Plot behavior
 % plots behavior as in Fig. 1c-g (Daume et al. 2024b)
-% set inputRange to full range
+% set inputRange to full range, it will crash when only a single session is
+% loaded in
 
 paramsSB.plotBehavior = 1;
 if paramsSB.plotBehavior
@@ -98,7 +99,7 @@ end
 %% STERNBERG Params
 paramsSB.doPlot = 0;  % if =1, plot significant cells. 
 paramsSB.plotAlways = 0; % Plot regardless of selectivity (NOTE: generates a lot of figure windows unless exportFig=1)
-paramsSB.exportFig = 0; 
+paramsSB.exportFig = 0; % this worked fine on Windows but created problems on a Mac (M3, Matlab 2024a)
 paramsSB.exportType = 'png'; % File type for export. 'png' is the default. 
 paramsSB.rateFilter =  0.1; % Rate filter in Hz. Removes cells from analysis that are below threshold. Setting to empty disables the filter. 
 paramsSB.figOut = [paths.figOut fs 'stats_sternberg'];
@@ -165,6 +166,9 @@ end
 %% Compute GLM
 % This computes the mixed-model GLM used for Fig. 3a in Daume et al. 2024b
 % and prints/plots its results
+% This needs the output from the "Determine Category Cells" section as it
+% computes the GLM across all category neurons
+
 paramsSB.doPlot = 1;
 paramsSB.computeGLM = 1;
 
