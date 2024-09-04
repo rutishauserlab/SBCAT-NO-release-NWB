@@ -1,5 +1,6 @@
-%% NWB_SBCAT_import_main
-% Sample code to load/analyze the provided dataset for Daume et. al. 2024
+%% NWB_SBCAT_NO_import_main
+% Sample code to load/analyze the provided dataset for Daume et. al. (2024)
+% "Persistent activity during working memory maintenance predicts long-term memory formation in the human hippocampus"
 % Calculates the following:
 %   - Behavioral metrics
 %   - Determine category-selective/memory-selective cells
