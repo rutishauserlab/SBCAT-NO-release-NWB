@@ -2,18 +2,18 @@
 % Sample code to load/analyze the provided dataset for Daume et. al. 2024
 % Calculates the following:
 %   - Behavioral metrics
-%   - Determine category-selective/memory-selective cells 
-%   - Computes and plots results of main GLM (Fig. 3a)
+%   - Determine category-selective/memory-selective cells
 %   - Proportion of CAT/MS cells per area
+%   - Compute and plot results of main GLM analysis (Fig. 3a)
 %   - Plotting of sample cells (Fig. 2a,4a)
-%
+
 
 clear; clc; close all
 fs = filesep;
 %% Parameters
 % The first section of the script sets important parameters.
 % The importRange is the range of files for the dataset. 
-% For the current release, subject IDs have a range of 1:44. 
+% For the current release, subject IDs have a range of 1:46. 
 % The full range can also be specified by setting importRange=[]
 
 
@@ -38,7 +38,7 @@ paths.nwb_sb = paths.baseData; % Dandiset Directory
 % This script should be in master directory
 scriptPath = matlab.desktop.editor.getActiveFilename; scriptPathParse = split(scriptPath,fs); scriptPathParse = scriptPathParse(1:end-1);
 paths.code = strjoin(scriptPathParse,filesep); 
-paths.matnwb = '/path-to-matlab-folder//MATLAB/matnwb-2.6.0.2';
+paths.matnwb = '/path-to-matlab-folder/MATLAB/matnwb-2.6.0.2';
 paths.figOut = [strjoin(scriptPathParse(1:end-1),filesep) fs 'sbcat_no_figures'];
 % Helpers
 if(~isdeployed) 
@@ -86,7 +86,8 @@ all_units_sbcat = NWB_SB_extractUnits(nwbAll_sb,load_all_waveforms);
 
 %% Plot behavior
 % plots behavior as in Fig. 1c-g (Daume et al. 2024b)
-% set inputRange to full range
+% set inputRange to full range, it will crash when only a single session is
+% loaded in
 
 paramsSB.plotBehavior = 1;
 if paramsSB.plotBehavior
@@ -97,7 +98,7 @@ end
 %% STERNBERG Params
 paramsSB.doPlot = 0;  % if =1, plot significant cells. 
 paramsSB.plotAlways = 0; % Plot regardless of selectivity (NOTE: generates a lot of figure windows unless exportFig=1)
-paramsSB.exportFig = 0; 
+paramsSB.exportFig = 0; % this worked fine on Windows but created problems on a Mac (M3, Matlab 2024a)
 paramsSB.exportType = 'png'; % File type for export. 'png' is the default. 
 paramsSB.rateFilter =  0.1; % Rate filter in Hz. Removes cells from analysis that are below threshold. Setting to empty disables the filter. 
 paramsSB.figOut = [paths.figOut fs 'stats_sternberg'];
@@ -164,6 +165,9 @@ end
 %% Compute GLM
 % This computes the mixed-model GLM used for Fig. 3a in Daume et al. 2024b
 % and prints/plots its results
+% This needs the output from the "Determine Category Cells" section as it
+% computes the GLM across all category neurons
+
 paramsSB.doPlot = 1;
 paramsSB.computeGLM = 1;
 
@@ -193,7 +197,7 @@ end
 % parameters section above to allow for the 
 % control of various stages of the analysis and plotting process. 
 
-paramsSB.doPlot = 0;
+paramsSB.doPlot = 0; %plotting not implemented for MS cells
 paramsSB.calcSelective = 1;
 if paramsSB.calcSelective
     [sig_MSCells_sb, areas_sb_mem] = NWB_calcMemSelective_SB(nwbAll_sb,all_units_sbcat,paramsSB);
