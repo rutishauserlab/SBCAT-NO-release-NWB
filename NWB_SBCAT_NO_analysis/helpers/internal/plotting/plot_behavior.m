@@ -33,7 +33,7 @@ h = figure('position',[300 300 250 400]);
 color = {[0.8 0.2 0.7],[0.1 0.25 0.6]};
 D = {acc_load1 acc_load3};
 makeScatterPlot(D,0,color);
-ylabel('Accuracy');
+ylabel('WM Accuracy');
 xlabel('WM load');
 ylim([0.5 1])
 set(gca,'xticklabel',{'load 1','load 3'},'fontsize',22,'fontname','Arial')
@@ -42,7 +42,7 @@ h = figure('position',[300 300 250 400]);
 color = {[0.8 0.2 0.7],[0.1 0.25 0.6]};
 D = {RT_load1 RT_load3};
 makeScatterPlot(D,0,color);
-ylabel('Reaction times (s)');
+ylabel('WM Reaction times (s)');
 xlabel('WM load');
 ylim([0 3])
 set(gca,'xticklabel',{'load 1','load 3'},'fontsize',22,'fontname','Arial')
@@ -73,7 +73,7 @@ h = figure('position',[300 300 250 400]);
 color = {[126 199 246]/255,[200 108 245]/255};
 D = {acc_highconf acc_lowconf};
 makeScatterPlot(D,0,color);
-ylabel('Accuracy');
+ylabel('LTM Accuracy');
 xlabel('LTM confidence');
 ylim([0 1])
 set(gca,'xticklabel',{'High','Low'},'fontsize',22,'fontname','Arial')
@@ -104,7 +104,7 @@ h = figure('position',[300 300 250 400]);
 color = {[0.8 0.2 0.7],[0.1 0.25 0.6]};
 D = {tpr_load1 tpr_load3};
 makeScatterPlot(D,0,color);
-ylabel('True positive rate');
+ylabel('LTM True positive rate');
 xlabel('WM load');
 ylim([0 1])
 set(gca,'xticklabel',{'load 1','load 3'},'fontsize',22,'fontname','Arial')
@@ -137,7 +137,7 @@ h = figure('position',[300 300 250 400]);
 color = {[59 137 168]./255,[245 181 110]./255}; 
 D = {tpr_probe tpr_noProbe};
 makeScatterPlot(D,0,color);
-ylabel('True positive rate');
+ylabel('LTM True positive rate');
 xlabel('Probe');
 ylim([0 1])
 set(gca,'xticklabel',{'shown','not shown'},'fontsize',22,'fontname','Arial')
