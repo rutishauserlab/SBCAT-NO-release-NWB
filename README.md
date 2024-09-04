@@ -25,7 +25,7 @@ This repository can be downloaded by entering the following commands:
 
 `cd $target_directory`
 
-`git clone https://github.com/rutishauserlab/SBCAT-release-NWB.git`
+`git clone https://github.com/rutishauserlab/SBCAT-NO-release-NWB.git`
 
 ## Installation (MatNWB)
 
@@ -54,7 +54,7 @@ All validators returned no errors in data formatting & best-use practices across
 
 ## MATLAB Analysis
 
-The main script in this repo, `NWB_SBCAT_SO_analysis_main.m`, is designed to analyze the released dataset and to reproduce select figures & metrics noted in Daume et. al. 2024b. It can calculate several metrics related to behavior (reaction time, accuracy) and single-unit (SU) activity during the task.
+The main script in this repo, `NWB_SBCAT_NO_analysis_main.m`, is designed to analyze the released dataset and to reproduce select figures & metrics noted in Daume et. al. 2024b. It can calculate several metrics related to behavior (reaction time, accuracy) and single-unit (SU) activity during the task.
 
 ### Steps to Use the Script
 * **Set Parameters:** The first section of the script sets important parameters. The `importRange` is the range of files for the dataset. For the current release, subject IDs have a range of `1:46`. The full range can also be specified by setting `importRange=[]`.
