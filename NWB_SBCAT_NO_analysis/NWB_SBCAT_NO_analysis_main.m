@@ -34,12 +34,12 @@ importRange = []; % Full Range
 % setup. This section also uses MatNWB's generateCore() function to 
 % initialize the NWB API if it has not been initialized already.
 
-paths.baseData = 'C:\svnwork\sbcat_no_venv\001187'; % Dataset directory
+paths.baseData = '/path-to-folder/Dandisets/001187'; % Dataset directory
 paths.nwb_sb = paths.baseData; % Dandiset Directory
 % This script should be in master directory
 scriptPath = matlab.desktop.editor.getActiveFilename; scriptPathParse = split(scriptPath,fs); scriptPathParse = scriptPathParse(1:end-1);
 paths.code = strjoin(scriptPathParse,filesep); 
-paths.matnwb = 'C:\svnwork\matnwb-2.6.0.2';
+paths.matnwb = '/path-to-matlab-folder//MATLAB/matnwb-2.6.0.2';
 paths.figOut = [strjoin(scriptPathParse(1:end-1),filesep) fs 'sbcat_no_figures'];
 % Helpers
 if(~isdeployed) 
