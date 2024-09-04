@@ -1,5 +1,5 @@
 %% NWB_SBCAT_import_main
-% Sample code to load/analyze the provided dataset for Daume et. al. 2024
+% Sample code to load/analyze the provided dataset for Daume et al. 2024
 % Calculates the following:
 %   - Behavioral metrics
 %   - Determine category-selective/memory-selective cells
@@ -35,7 +35,7 @@ importRange = []; % Full Range
 
 paths.baseData = '/path-to-folder/Dandisets/001187'; % Dataset directory
 paths.nwb_sb = paths.baseData; % Dandiset Directory
-% This script should be in master directory
+% This script should be in the master directory
 scriptPath = matlab.desktop.editor.getActiveFilename; scriptPathParse = split(scriptPath,fs); scriptPathParse = scriptPathParse(1:end-1);
 paths.code = strjoin(scriptPathParse,filesep); 
 paths.matnwb = '/path-to-matlab-folder/MATLAB/matnwb-2.6.0.2';
@@ -43,7 +43,7 @@ paths.figOut = [strjoin(scriptPathParse(1:end-1),filesep) fs 'sbcat_no_figures']
 % Helpers
 if(~isdeployed) 
   cd(fileparts(matlab.desktop.editor.getActiveFilename));
-  addpath(genpath([pwd fs 'helpers'])) % Should be in same folder as active script. 
+  addpath(genpath([pwd fs 'helpers'])) % Should be in the same folder as the active script. 
 else
     error('Unexpected error.')
 end
@@ -57,7 +57,7 @@ end
 % generateCore() for first instantiation of matnwb API
 fprintf('Checking generateCore() ... ')
 if isfile([paths.matnwb fs '+types' fs '+core' fs 'NWBFile.m'])
-     fprintf('generateCore() already initialized.\n') %only need to do once
+     fprintf('generateCore() already initialized.\n') %only need to do this once
 else 
     cd(paths.matnwb)
     generateCore();
@@ -100,7 +100,7 @@ paramsSB.doPlot = 0;  % if =1, plot significant cells.
 paramsSB.plotAlways = 0; % Plot regardless of selectivity (NOTE: generates a lot of figure windows unless exportFig=1)
 paramsSB.exportFig = 0; % this worked fine on Windows but created problems on a Mac (M3, Matlab 2024a)
 paramsSB.exportType = 'png'; % File type for export. 'png' is the default. 
-paramsSB.rateFilter =  0.1; % Rate filter in Hz. Removes cells from analysis that are below threshold. Setting to empty disables the filter. 
+paramsSB.rateFilter =  0.1; % Rate filter in Hz. Removes cells from analysis that are below threshold. Set to '0' to disable the filter. 
 paramsSB.figOut = [paths.figOut fs 'stats_sternberg'];
 
 %% Determine Category Cells
@@ -164,9 +164,9 @@ end
 
 %% Compute GLM
 % This computes the mixed-model GLM used for Fig. 3a in Daume et al. 2024b
-% and prints/plots its results
+% and prints/plots its results.
 % This needs the output from the "Determine Category Cells" section as it
-% computes the GLM across all category neurons
+% computes the GLM across all category neurons.
 
 paramsSB.doPlot = 1;
 paramsSB.computeGLM = 1;
